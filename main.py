@@ -10,3 +10,4 @@ import prep_data as p_pd
 df = pd.read_csv("csv_cleaned.csv", sep=",")
 
 df_prep = p_pd.clean_data(df)
+df_prep.to_csv("CSV_IA.csv", index=False)

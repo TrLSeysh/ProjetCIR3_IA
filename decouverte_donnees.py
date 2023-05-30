@@ -31,6 +31,7 @@ fig_surface.show()
 fig_vehicule = px.histogram(df['num_veh'])
 fig_vehicule.show()
 """
+
 plt.subplot(2,2,1)
 plt.hist(df['descr_grav'])
 plt.title("Gravité des accidents")
@@ -41,11 +42,12 @@ plt.title("Lumnisoité de l'accident")
 
 plt.subplot(2,2,3)
 plt.hist(df['descr_athmo'])
-plt.title("Lumnisoité de l'accident")
+plt.title("L'athmosphère de l'accident")
 
 plt.subplot(2,2,4)
 plt.hist(df['descr_etat_surf'])
 plt.title("Etat de la route")
 
-
+#Interprétation  le nombre d'accident est plus élèvées lorsque des conditions sont optimales à la conduite
+# Conclusion les gens(majorité) n'ont aucune excuse sur la raison de leur accidents sauf leur imcompétences 
 plt.show()
