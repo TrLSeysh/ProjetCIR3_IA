@@ -5,37 +5,49 @@ Python file used to prepare data for clustering by :
 """
 import pandas as pd
 
-def clean_data(df):
+def clean_data(df_prep):
     """
     return csv_file cleaned and prepared 
 
     """
-    col_to_num(df)
-    convert_date(df)
+    df_prep = col_to_num(df_prep)
+    df_prep = convert_date(df_prep)
+
+    return df_prep
 
 
-def col_to_num(df):
+def col_to_num(df_prep):
     """
     change string values to numeric values
 
     """
-    for key in df.keys():
+    for key in df_prep.keys():
         print(f"\nchange values from : {key} to numeric")
 
-        if isinstance(df[key][0], str) and key != "date":
+        if isinstance(df_prep[key][0], str) and key != "date":
             change_dict = {}
             i = 0
-            for element in df[key].unique():
+            for element in df_prep[key].unique():
                 change_dict[element] = i
                 i += 1
                 print(f"{element} => {i}")
-            
-            print("\nchanging data...")
-            print(df[key].replace(change_dict))
 
-def convert_date(df):
+            print("\nchanging data...")
+            df_prep[key] = df_prep[key].replace(change_dict)
+            print("Complete!")
+
+    return df_prep
+
+def convert_date(df_prep):
     """
     convert date & hour format to a usable one
 
     """
-    print(df)
+    print("\nchanging str dates to datetime...")
+
+    df_prep["date"] = pd.to_datetime(df_prep["date"])
+    df_prep["an_nais"] = pd.to_datetime(df_prep["an_nais"], format="%Y", yearfirst=True)
+
+    print(df_prep["an_nais"])
+
+    return df_prep
