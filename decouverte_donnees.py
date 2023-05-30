@@ -31,6 +31,7 @@ fig_surface.show()
 fig_vehicule = px.histogram(df['num_veh'])
 fig_vehicule.show()
 """
+
 plt.subplot(2,2,1)
 plt.hist(df['descr_grav'])
 plt.title("Gravité des accidents")
