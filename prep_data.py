@@ -57,7 +57,7 @@ def convert_date(df_prep):
     df_prep["date"] = pd.to_datetime(df_prep["date"])
     df_prep["jour"] = pd.to_datetime(df_prep["date"]).dt.strftime('%d/%m')
     df_prep["heure"] = pd.to_datetime(df_prep["date"]).dt.strftime('%H:%M')
-    df_prep = df_prep.drop("date")
+    df_prep = df_prep.drop("date", axis='columns')
 
     df_prep["an_nais"] = pd.to_datetime(df_prep["an_nais"], format="%Y", yearfirst=True).dt.strftime('%Y')
     return df_prep

@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-df= pd.read_csv("ProjetCIR3_IA\stat_acc_V4.csv", encoding="latin-1")
+df= pd.read_csv("stat_acc_V4.csv", encoding="latin-1")
 
 
 #Remplacement de la gravité de l'accident par une valeur en chiffre
