@@ -5,16 +5,24 @@ Python file used to prepare data for clustering by :
 """
 import pandas as pd
 
+
 def clean_data(df_prep):
     """
-    return csv_file cleaned and prepared 
+    return csv_file cleaned and prepared
 
     """
+    df_prep = remove_useless_column(df_prep)
     df_prep = col_to_num(df_prep)
     df_prep = convert_date(df_prep)
 
     return df_prep
 
+def remove_useless_column(df_prep):
+    """
+    return a the data.frame with only useful data
+
+    """
+    return df_prep.drop(["Num_Acc", "ville", "age"], axis='columns')
 
 def col_to_num(df_prep):
     """
@@ -38,6 +46,7 @@ def col_to_num(df_prep):
 
     return df_prep
 
+
 def convert_date(df_prep):
     """
     convert date & hour format to a usable one
@@ -48,6 +57,6 @@ def convert_date(df_prep):
     df_prep["date"] = pd.to_datetime(df_prep["date"])
     df_prep["an_nais"] = pd.to_datetime(df_prep["an_nais"], format="%Y", yearfirst=True)
 
-    print(df_prep["an_nais"])
+    print(df_prep["date"])
 
     return df_prep
