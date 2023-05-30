@@ -22,7 +22,7 @@ def remove_useless_column(df_prep):
     return a the data.frame with only useful data
 
     """
-    return df_prep.drop(["Num_Acc", "ville", "age"], axis='columns')
+    return df_prep.drop(["Unnamed: 0", "Num_Acc", "ville", "age"], axis='columns')
 
 def col_to_num(df_prep):
     """
