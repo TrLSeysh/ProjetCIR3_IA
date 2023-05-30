@@ -1,16 +1,20 @@
 from matplotlib import pyplot as plt 
 import pandas as pd
 from sklearn.decomposition import PCA
+import numpy as np
 
-data = pd.read_csv('C:/Users/Adrien/OneDrive/Bureau/Work/ISEN/Big_Data/Projet A3-20230522/ProjetCIR3_IA/csv_cleaned.csv', delimiter=',', encoding="ISO-8859-1")
-# line_count = 0
-# for row in data:
-#     if line_count == 0:
-#         print(f'Column names are {", ".join(row)}')
-#     line_count += 1
-       
-#     print(f'Processed {line_count} lines.')
+import prep_data as p_pd
 
+df = pd.read_csv("csv_cleaned.csv", sep=",")
+
+# print(df.columns)
+corr_matrix = df.corr()
+print(corr_matrix["descr_grav"])
+
+# tot_corr = np.corrcoef(df)
+# corr = np.corrcoef(df['descr_grav'], df['num_veh'])
+# print(tot_corr)
+# print(corr)
 
 # pca = PCA(n_components=2)
 # X_red = pca.fit_transform(X)
