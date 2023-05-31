@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import LeaveOneOut, cross_val_score
 
-def repart_donnees():
+def hold_out():
     df=pd.read_csv("CSV_IA_red.csv")
 
     df= df.dropna()
@@ -31,7 +31,14 @@ def repart_donnees():
     print("Précision:", precision)
     print("Rappel:", recall)
     print("F1-score:", f1)
+    return X_train, X_test
 
+def Leave_one_out():
+    df=pd.read_csv("CSV_IA_red.csv")
+
+    df= df.dropna()
+    X =  df.drop(["descr_grav"], axis=1)
+    y = df["descr_grav"]
     X = X[:1000]
     y = y[:1000]
 
@@ -40,7 +47,7 @@ def repart_donnees():
 
     performance_score = 0.0
 
-#boucle Leave Out one
+    #boucle Leave Out one
     for i in range(len(X)):
      X_train = np.delete(X, i, axis=0)
      Y_train = np.delete(y, i, axis=0)
@@ -59,7 +66,8 @@ def repart_donnees():
      performance_score += accuracy_score(y_true, y_pred)
 
 
-# Calculer la moyenne du score de performance
+ # Calculer la moyenne du score de performance
     average_performance_score = performance_score / len(X)
     print("Leave One Out")
     print("Score de performance moyen(accuracy_score) :", average_performance_score)
+    return X_train, X_test
