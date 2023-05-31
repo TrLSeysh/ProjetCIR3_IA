@@ -15,6 +15,7 @@ def clean_data(df_prep):
     df_prep = col_to_num(df_prep)
     df_prep = convert_date(df_prep)
     df_prep = invert_lat_lon(df_prep)
+    df_prep = change_data(df_prep)
 
     return df_prep
 
@@ -89,10 +90,22 @@ def invert_lat_lon(df_prep):
     for element in enumerate(df_prep["id_code_insee"]):
 
         if element[1][:2] == '97' :
-            print(element[1][:2])
 
             temp_var = df_prep.loc[element[0],"latitude"]
             df_prep.loc[element[0],"latitude"] = df_prep.loc[element[0],"longitude"]
             df_prep.loc[element[0],"longitude"] = temp_var
+
+    return df_prep
+
+def change_data(df_prep):
+    """
+    
+    Change descr_grav to 2 labels only and remove [lat : 0, lon : 0] point
+    
+    """
+    df_prep = df_prep.loc[(df_prep["latitude"] != 0) | (df_prep["longitude"] != 0)]
+
+    #0 : Indemne / 1 : Blessé léger / 2 Tué & blessé grave
+    df_prep.loc[:, "descr_grav"] = df_prep["descr_grav"].replace({1: 0, 2: 2, 3: 2, 4: 1})
 
     return df_prep
