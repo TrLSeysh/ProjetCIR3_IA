@@ -17,3 +17,9 @@ df_prep.to_csv("CSV_IA.csv", index=False)
 
 #p_kmscr.Kmeans_scratch()
 p_kmsci.k_mean(df_prep)
+
+# Reduction de la dimension
+rd.correlation(df_prep)
+df_reduc = rd.reduc_dim_grav(df_prep)
+df_reduc.to_csv("CSV_IA_red.csv", index=False)
+p_kms.k_mean(df_prep)

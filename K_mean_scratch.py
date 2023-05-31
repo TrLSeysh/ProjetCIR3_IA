@@ -70,7 +70,7 @@ def Kmeans_scratch():
     latitude = df['latitude'].values
     longitude = df['longitude'].values
     n_clusters = 5
-
+    
     labels, centroids = kmeans(latitude, longitude, n_clusters)
 
     #Faire apparaitre la carte
