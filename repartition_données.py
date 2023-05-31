@@ -31,7 +31,7 @@ def hold_out():
     print("Précision:", precision)
     print("Rappel:", recall)
     print("F1-score:", f1)
-    return X_train, X_test
+    return X_train, X_test, y_train ,y_test
 
 def Leave_one_out():
     df=pd.read_csv("CSV_IA_red.csv")
@@ -70,4 +70,4 @@ def Leave_one_out():
     average_performance_score = performance_score / len(X)
     print("Leave One Out")
     print("Score de performance moyen(accuracy_score) :", average_performance_score)
-    return X_train, X_test
+    return X_train, X_test, Y_train, y_true
