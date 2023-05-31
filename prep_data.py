@@ -94,6 +94,16 @@ def invert_lat_lon(df_prep):
             temp_var = df_prep.loc[element[0],"latitude"]
             df_prep.loc[element[0],"latitude"] = df_prep.loc[element[0],"longitude"]
             df_prep.loc[element[0],"longitude"] = temp_var
+        
+        if element[1][:2] == '2A' :
+            temp_insee = df_prep.loc[element[0],"id_code_insee"]
+            df_prep.loc[element[0],"id_code_insee"] = '98' + temp_insee[2:]
+        
+        if element[1][:2] == '2B' :
+            temp_insee = df_prep.loc[element[0],"id_code_insee"]
+            df_prep.loc[element[0],"id_code_insee"] = '99' + temp_insee[2:]
+
+
 
     return df_prep
 
