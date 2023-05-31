@@ -8,6 +8,7 @@ import decouverte_donnees as p_dd
 import prep_data as p_pd
 import k_mean_scikit as p_kmsci
 import K_mean_scratch as p_kmscr
+import reduc_dim as rd
 
 df = pd.read_csv("csv_cleaned.csv", sep=",")
 df.info()
@@ -22,4 +23,3 @@ p_kmsci.k_mean(df_prep)
 rd.correlation(df_prep)
 df_reduc = rd.reduc_dim_grav(df_prep)
 df_reduc.to_csv("CSV_IA_red.csv", index=False)
-p_kms.k_mean(df_prep)
