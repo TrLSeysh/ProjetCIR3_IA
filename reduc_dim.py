@@ -40,5 +40,5 @@ def reduc_dim_grav(df_corr):
                           'id_code_insee'])
     
 
-reduc_dim_grav(df_corr)
-df_corr.info()
+# reduc_dim_grav(df_corr)
+# df_corr.info()
