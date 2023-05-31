@@ -63,13 +63,13 @@ def kmeans(latitude, longitude, n_clusters, max_iters=100):
         # Retourner les étiquettes des clusters et les centres finaux
         return labels, centroids
 
-def Kmeans_scratch():
+def Kmeans_scratch(user_clusters= 5):
     df= pd.read_csv("CSV_IA.csv", encoding="latin-1")
 
     #Avoir les valeurs de la dataframe sur une variable
     latitude = df['latitude'].values
     longitude = df['longitude'].values
-    n_clusters = 5
+    n_clusters = user_clusters
     
     labels, centroids = kmeans(latitude, longitude, n_clusters)
 
