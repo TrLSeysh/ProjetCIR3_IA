@@ -18,8 +18,8 @@ df_prep = p_pd.clean_data(df)
 df_prep.to_csv("CSV_IA.csv", index=False)
 
 #p_kmscr.Kmeans_scratch()
-p_kmsci.k_mean(df_prep)
-p_kmscr.Kmeans_scratch()
+#p_kmsci.k_mean(df_prep)
+#p_kmscr.Kmeans_scratch()
 
 # Reduction de la dimension
 # rd.correlation(df_prep)
@@ -29,5 +29,5 @@ df_reduc.to_csv("CSV_IA_red.csv", index=False)
 # rd.correlation(df_reduc)
 
 # Classification
-k_sci.kNN_scikit(df_reduc)
-k_scr.kNN_scratch(df_reduc)
+#k_sci.kNN_scikit(df_reduc)
+#k_scr.kNN_scratch(df_reduc)
