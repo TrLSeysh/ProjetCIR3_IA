@@ -35,7 +35,7 @@ def reduc_dim_grav(df_corr):
     corr_ordered = list_corr.sort_values()
     print(corr_ordered)
     # print(corr_matrix)
-    return df_corr.drop(columns=['jour', 'id_usa', 'descr_athmo', 'descr_etat_surf', 'descr_agglo', 
+    return df_corr.drop(columns=['mois', 'id_usa', 'descr_athmo', 'descr_etat_surf', 'descr_agglo', 
                           'num_veh','X', 'descr_motif_traj', 'place', 'descr_dispo_secu', 'heure',
                           'id_code_insee'])
     
