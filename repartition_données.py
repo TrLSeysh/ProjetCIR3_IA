@@ -7,16 +7,15 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.model_selection import LeaveOneOut, cross_val_score
 
 
-def hold_out():
-    df=pd.read_csv("CSV_IA_red.csv", sep=",")
+def hold_out(df):
+
     df= df.dropna()
     X =  df.drop(["descr_grav"], axis=1)
     y = df["descr_grav"]
     X_train, X_test, y_train , y_test = train_test_split(X,y,test_size=0.2, random_state=50)
     return X_train, X_test, y_train ,y_test
 
-def leave_one_out():
-    df = pd.read_csv("CSV_IA_red.csv")
+def leave_one_out(df):
 
     df = df.dropna()
     df = df.head(2000)
@@ -31,6 +30,3 @@ def leave_one_out():
 
     print("done")
     return X_train, X_test, y_train, y_test
-
-
-leave_one_out()

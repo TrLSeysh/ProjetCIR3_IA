@@ -4,12 +4,6 @@ from collections import Counter
 
 import repartition_données as rpd
 
-df_knn = pd.read_csv("CSV_IA_red.csv", sep=",")
-X = df_knn.drop("descr_grav", axis=1)
-y = df_knn["descr_grav"]
-
-X_train, X_test, y_train, y_test = rpd.hold_out()
-
 def euclidean_distance(x1, x2):
     distance = 0.0
     for i in range(len(x1)):
