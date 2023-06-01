@@ -19,7 +19,6 @@ df_prep = p_pd.clean_data(df)
 df_prep.to_csv("CSV_IA.csv", index=False)
 
 
-
 # Reduction de la dimension
 # rd.correlation(df_prep)
 df_reduc = rd.reduc_dim_grav(df_prep)
@@ -28,8 +27,7 @@ df_reduc.to_csv("CSV_IA_red.csv", index=False)
 # rd.correlation(df_reduc)
 
 #p_kmscr.Kmeans_scratch()
-#p_kmsci.display_kmean(df_prep, 21)
-#p_kmscr.Kmeans_scratch()
+
 mt.evaluate_kmeans(df_reduc[:1000])
 
 # Classification

@@ -38,5 +38,3 @@ def kNN_scratch(df_knn):
 
     print("Modalité la plus commune de descr_grav :", modalite)
 
-kNN_scratch(df_knn)
-

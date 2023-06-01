@@ -103,9 +103,7 @@ def Kmeans_scratch( user_clusters, func="Haversine"):
 
     data = pd.DataFrame({'latitude': latitude, 'longitude': longitude, 'labels': labels})
     fig = px.scatter_mapbox(data, lat="latitude", lon="longitude", color="labels" )
-    fig.add_trace(px.scatter_mapbox(pd.DataFrame({'latitude': centroids[:, 0], 'longitude': centroids[:, 1]}), lat="latitude", lon="longitude", color_discrete_sequence=['red']).data[0])
+    #fig.add_trace(px.scatter_mapbox(pd.DataFrame({'latitude': centroids[:, 0], 'longitude': centroids[:, 1]}), lat="latitude", lon="longitude", color_discrete_sequence=['red']).data[0])
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.show()
-
-Kmeans_scratch(10, func="L2")
