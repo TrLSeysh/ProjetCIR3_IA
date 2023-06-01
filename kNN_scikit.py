@@ -24,19 +24,19 @@ def kNN_scikit(df_knn, X_train, X_test, y_train, y_test):
     y = df_knn["descr_grav"]
     y = y.values
     
-    knn_model = KNeighborsRegressor(n_neighbors=3)
-    knn_model.fit(X_train, y_train)
-    # Evaluation RMSE sur base Training
-    train_preds = knn_model.predict(X_train)
-    mse = mean_squared_error(y_train, train_preds)
-    rmse = sqrt(mse)
-    print('RMSE sur base Training', rmse)
+    knn_model = KNeighborsRegressor(n_neighbors=48)
+    knn_model = knn_model.fit(X_train, y_train)
+    test_preds = knn_model.predict(X_test).round()
 
-    # Evaluation RMSE sur base Test
-    test_preds = knn_model.predict(X_test)
-    mse = mean_squared_error(y_test, test_preds)
-    rmse = sqrt(mse)
-    print('RMSE sur base Test', rmse)
+    return test_preds, knn_model
 
 
-kNN_scikit(df_knn, X_train, X_test, y_train, y_test)
+test_preds, knn_model = kNN_scikit(df_knn, X_train, X_test, y_train, y_test)
+print(test_preds, knn_model)
+
+from sklearn.model_selection import GridSearchCV
+
+parameters = {"n_neighbors": range(1, 50)}
+gridsearch = GridSearchCV(knn_model, parameters)
+gridsearch.fit(X_train, y_train)
+print(gridsearch.best_params_)

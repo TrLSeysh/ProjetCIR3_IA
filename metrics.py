@@ -109,15 +109,41 @@ def calc_score(s_score, ch_score, bd_score, X, nb_clusters):
         "\n",
     )
 
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import precision_score, recall_score, accuracy_score
+from sklearn.metrics import roc_curve, RocCurveDisplay 
 
-def evaluate_classifaction(X, X_pred):
+def evaluate_classifaction(knn_model, X_test, y_test, test_preds):
     """
     evaluate classification results using :
 
-    • F1-Score
+    • Accuracy
     • Confusion matrix
     • Precision-Recall
     • Compute Area Under the Receiver Operating Characteristic Curve
 
     """
-    print("none")
+    # Accuracy, Precision and recall
+    accuracy = accuracy_score(y_test, test_preds)
+    precision = precision_score(y_test, test_preds, average='macro')
+    recall = recall_score(y_test, test_preds, average='macro')
+    print('Classification Accuracy: ', accuracy)
+    print('Classification Precision: ', precision)
+    print('Classification Recall: ', recall)
+
+    # Confusion Matrix
+    cm = confusion_matrix(y_test, test_preds)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    plt.show()
+
+    # ROC
+    y_scores = knn_model.predict(X_test)  
+
+    # Calculer les taux de faux positifs et de vrais positifs
+    fpr, tpr, thresholds = roc_curve(y_test, y_scores)
+
+    # Afficher la courbe ROC
+    roc_display = RocCurveDisplay(fpr=fpr, tpr=tpr)
+    roc_display.plot()
+    plt.show()

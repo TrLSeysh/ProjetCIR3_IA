@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
+from collections import Counter
 
 import repartition_données as rpd
-from collections import Counter
 
 df_knn = pd.read_csv("CSV_IA_red.csv", sep=",")
 X = df_knn.drop("descr_grav", axis=1)
@@ -51,5 +51,5 @@ def test_kNN_scr(X_train, X_test, y_train):
     np.set_printoptions(suppress=True)
     print(X_train.values[0])    
     print(X_test.values[0])
+    return predictions, knn_scratch
 
-test_kNN_scr(X_train, X_test, y_train)
