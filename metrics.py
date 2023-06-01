@@ -8,6 +8,7 @@ import numpy as np
 import k_mean_scikit as p_kmsci
 import K_mean_scratch as p_kmscr
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def evaluate_kmeans(df_prep):
@@ -19,18 +20,21 @@ def evaluate_kmeans(df_prep):
     • Davies Bouldin Index
 
     """
-    s_score = {"from_scratch": [], "scikit": []}
-    ch_score = {"from_scratch": [], "scikit": []}
-    bd_score = {"from_scratch": [], "scikit": []}
-    nb_clusters = [3, 5, 8, 12]
+    s_score = {"from_scratch": {"L1": [], "L2": [], "Haversine": []}, "scikit": []}
+    ch_score = {"from_scratch": {"L1": [], "L2": [], "Haversine": []}, "scikit": []}
+    bd_score = {"from_scratch": {"L1": [], "L2": [], "Haversine": []}, "scikit": []}
+    nb_clusters = np.array([3, 5, 8, 12])
 
     X = np.column_stack((df_prep["longitude"], df_prep["latitude"]))
 
     for i in enumerate(nb_clusters):
         calc_score(s_score, ch_score, bd_score, X, i[1])
     
-    plt.plot(nb_clusters, s_score["scikit"], color="red", marker="o", label="scikit")
-    plt.plot(nb_clusters, s_score["from_scratch"], color="black", marker="o", label="from scratch")
+    print(s_score["scikit"])
+    plt.bar(nb_clusters-0.3, s_score["scikit"], 0.2, color="#E5C3D1", label="scikit")
+    plt.bar(nb_clusters-0.1, s_score["from_scratch"]["L1"], 0.2, color="#A0DDFF", label="L1")
+    plt.bar(nb_clusters+0.1, s_score["from_scratch"]["L2"], 0.2, color="#DEF6CA", label="L2")
+    plt.bar(nb_clusters+0.3, s_score["from_scratch"]["Haversine"], 0.2, color="#FFB997", label="Haversine")
     
     plt.xticks(nb_clusters)
     plt.xlabel("Nombre de clusters")
@@ -39,8 +43,10 @@ def evaluate_kmeans(df_prep):
     plt.legend()
     plt.show()
 
-    plt.plot(nb_clusters, ch_score["scikit"], color="red", marker="o", label="scikit")
-    plt.plot(nb_clusters, ch_score["from_scratch"], color="black", marker="o", label="from scratch")
+    plt.bar(nb_clusters-0.3, ch_score["scikit"], 0.2, color="#E5C3D1", label="scikit")
+    plt.bar(nb_clusters-0.1, ch_score["from_scratch"]["L1"], 0.2, color="#A0DDFF", label="L1")
+    plt.bar(nb_clusters+0.1, ch_score["from_scratch"]["L2"], 0.2, color="#DEF6CA", label="L2")
+    plt.bar(nb_clusters+0.3, ch_score["from_scratch"]["Haversine"], 0.2, color="#FFB997", label="Haversine")
 
     plt.xticks(nb_clusters)
     plt.xticks(nb_clusters)
@@ -50,8 +56,10 @@ def evaluate_kmeans(df_prep):
     plt.legend()
     plt.show()
 
-    plt.plot(nb_clusters, bd_score["scikit"], color="red", marker="o", label="scikit")
-    plt.plot(nb_clusters, bd_score["from_scratch"], color="black", marker="o", label="from_scratch")
+    plt.bar(nb_clusters-0.3, bd_score["scikit"], 0.2, color="#E5C3D1", label="scikit")
+    plt.bar(nb_clusters-0.1, bd_score["from_scratch"]["L1"], 0.2, color="#A0DDFF", label="L1")
+    plt.bar(nb_clusters+0.1, bd_score["from_scratch"]["L2"], 0.2, color="#DEF6CA", label="L2")
+    plt.bar(nb_clusters+0.3, bd_score["from_scratch"]["Haversine"], 0.2, color="#FFB997", label="Haversine")
 
     plt.xticks(nb_clusters)
     plt.xticks(nb_clusters)
@@ -60,6 +68,40 @@ def evaluate_kmeans(df_prep):
     plt.title("Index de Bouldin Davies en fonction du nombre de cluster")
     plt.legend()
     plt.show()
+
+    pd.Series(
+         data={3: pd.DataFrame(
+            data={
+                 "methode":[],
+                 "metric":[],
+            }
+         ),
+         5: pd.DataFrame(
+            
+         ),
+         8: pd.DataFrame(
+            data={}
+         ),
+         12: pd.DataFrame(
+         
+         )
+               }
+    )
+    for i in enumerate(s_score):
+                print(i)
+                # change_dict = pd.concat(
+                #     [
+                #         change_dict,
+                #         pd.DataFrame(
+                #             data={"nb cluster": "méthode": i[0], "metric": i[1], "score":},
+                #             columns=["index", "value"],
+                #             index=[key],
+                #         ),
+                #     ]
+                # )
+
+    # print("\nExporting data...")
+    # change_dict.to_excel("metrics_kmean.xlsx")
 
 
 
@@ -89,25 +131,28 @@ def calc_score(s_score, ch_score, bd_score, X, nb_clusters):
         "\n",
     )
 
-    labels, centroids = p_kmscr.kmeans(X[:, 0], X[:, 1], nb_clusters)
+    methods = ["L1", "L2", "Haversine"]
 
-    s_score["from_scratch"].append(sk_m.silhouette_score(X, labels))
-    ch_score["from_scratch"].append(sk_m.calinski_harabasz_score(X, labels))
-    bd_score["from_scratch"].append(sk_m.davies_bouldin_score(X, labels))
+    for name in methods:
+        labels, centroids = p_kmscr.kmeans(X[:, 1], X[:, 0], 100, nb_clusters, func=name)
 
-    print(
-        f"Résultat coefficient de silhouette avec n = {nb_clusters} et méthode from scratch : ",
-        s_score["from_scratch"][-1],
-    )
-    print(
-        f"Résultat index de Calinski Harabasz avec n = {nb_clusters} et méthode from scratch : ",
-        ch_score["from_scratch"][-1],
-    )
-    print(
-        f"Résultat index de Bouldin Davies avec n = {nb_clusters} et méthode from scratch :",
-        bd_score["from_scratch"][-1],
-        "\n",
-    )
+        s_score["from_scratch"][name].append(sk_m.silhouette_score(X, labels))
+        ch_score["from_scratch"][name].append(sk_m.calinski_harabasz_score(X, labels))
+        bd_score["from_scratch"][name].append(sk_m.davies_bouldin_score(X, labels))
+
+        print(
+            f"Résultat coefficient de silhouette avec n = {nb_clusters} et méthode {name} : ",
+            s_score["from_scratch"][name][-1],
+        )
+        print(
+            f"Résultat index de Calinski Harabasz avec n = {nb_clusters} et méthode {name} : ",
+            ch_score["from_scratch"][name][-1],
+        )
+        print(
+            f"Résultat index de Bouldin Davies avec n = {nb_clusters} et méthode {name} :",
+            bd_score["from_scratch"][name][-1],
+            "\n",
+        )
 
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.metrics import precision_score, recall_score, accuracy_score
