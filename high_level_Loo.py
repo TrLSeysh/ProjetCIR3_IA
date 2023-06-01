@@ -29,7 +29,7 @@ def leave_one_out():
     X_train_list, X_test_list, y_train_list, y_test_list = [], [], [], []
 
     for train_index, test_index in loo.split(X):
-        X_train, X_test = X[train_index], X[test_index]
+            X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
         X_train_list.append(X_train)
         X_test_list.append(X_test)
