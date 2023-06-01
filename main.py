@@ -10,6 +10,7 @@ import k_mean_scikit as p_kmsci
 import K_mean_scratch as p_kmscr
 import kNN_scikit as k_sci
 import kNN_scratch as k_scr
+import metrics as mt
 
 df = pd.read_csv("csv_cleaned.csv", sep=",")
 df.info()
@@ -17,9 +18,7 @@ df.info()
 df_prep = p_pd.clean_data(df)
 df_prep.to_csv("CSV_IA.csv", index=False)
 
-#p_kmscr.Kmeans_scratch()
-#p_kmsci.k_mean(df_prep)
-#p_kmscr.Kmeans_scratch()
+
 
 # Reduction de la dimension
 # rd.correlation(df_prep)
@@ -27,6 +26,11 @@ df_reduc = rd.reduc_dim_grav(df_prep)
 df_reduc.to_csv("CSV_IA_red.csv", index=False)
 df_reduc.to_csv("CSV_IA_red.csv", index=False)
 # rd.correlation(df_reduc)
+
+#p_kmscr.Kmeans_scratch()
+#p_kmsci.display_kmean(df_prep, 21)
+#p_kmscr.Kmeans_scratch()
+mt.evaluate_kmeans(df_reduc[:1000])
 
 # Classification
 #k_sci.kNN_scikit(df_reduc)
