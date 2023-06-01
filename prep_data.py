@@ -115,7 +115,7 @@ def change_data(df_prep):
 
     # 0 : Indemne / 1 : Blessé léger / 2 Tué & blessé grave
     df_prep.loc[:, "descr_grav"] = df_prep["descr_grav"].replace(
-        {1: 0, 2: 0, 3: 1, 4: 1}
+        {1: 0, 2: 1, 3: 1, 4: 0}
     )
 
     return df_prep

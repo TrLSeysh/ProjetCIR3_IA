@@ -24,7 +24,7 @@ def kNN_scikit(df_knn, X_train, X_test, y_train, y_test):
     y = df_knn["descr_grav"]
     y = y.values
     
-    knn_model = KNeighborsRegressor(n_neighbors=3)
+    knn_model = KNeighborsRegressor(n_neighbors=48)
     knn_model = knn_model.fit(X_train, y_train)
     test_preds = knn_model.predict(X_test).round()
 
