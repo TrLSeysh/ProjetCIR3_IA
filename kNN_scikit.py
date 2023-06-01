@@ -6,12 +6,15 @@ from sklearn.metrics import mean_squared_error
 from math import sqrt
 import seaborn as sns
 from matplotlib import pyplot as plt
+import plotly.express as px
+
+import repartition_données as rpd
 
 df_knn = pd.read_csv("CSV_IA_red.csv", sep=",")
 df_knn = df_knn.dropna()
+X_train, X_test, y_train, y_test = rpd.hold_out()
 
-
-def kNN_scikit(df_knn):
+def kNN_scikit(df_knn, X_train, X_test, y_train, y_test):
     """
     KNN Classification with sklearn
 
@@ -20,26 +23,20 @@ def kNN_scikit(df_knn):
     X = X.values
     y = df_knn["descr_grav"]
     y = y.values
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=12345
-    )
-    knn_model = KNeighborsRegressor(n_neighbors=3)
-    knn_model.fit(X_train, y_train)
-    # Evaluation RMSE sur base Training
-    train_preds = knn_model.predict(X_train)
-    mse = mean_squared_error(y_train, train_preds)
-    rmse = sqrt(mse)
-    print("RMSE sur base Training", rmse)
+    
+    knn_model = KNeighborsRegressor(n_neighbors=48)
+    knn_model = knn_model.fit(X_train, y_train)
+    test_preds = knn_model.predict(X_test).round()
 
-    # Evaluation RMSE sur base Test
-    test_preds = knn_model.predict(X_test)
-    mse = mean_squared_error(y_test, test_preds)
-    rmse = sqrt(mse)
-    print("RMSE sur base Test", rmse)
+    return test_preds, knn_model
 
-    # Ploting the predict classes classification
-    cmap = sns.cubehelix_palette(as_cmap=True)
-    f, ax = plt.subplots()
-    points = ax.scatter(X_test[:, 1], X_test[:, 0], c=test_preds, s=50, cmap=cmap)
-    f.colorbar(points)
-    plt.show()
+
+test_preds, knn_model = kNN_scikit(df_knn, X_train, X_test, y_train, y_test)
+print(test_preds, knn_model)
+
+# from sklearn.model_selection import GridSearchCV
+
+# parameters = {"n_neighbors": range(1, 50)}
+# gridsearch = GridSearchCV(knn_model, parameters)
+# gridsearch.fit(X_train, y_train)
+# print(gridsearch.best_params_)
