@@ -2,7 +2,7 @@
 Module pandas & numpy used for data formatting
 """
 import pandas as pd
-import numpy as np  
+import numpy as np
 import decouverte_donnees as p_dd
 import prep_data as p_pd
 import reduc_dim as rd
@@ -26,10 +26,10 @@ df_reduc.to_csv("CSV_IA_red.csv", index=False)
 df_reduc.to_csv("CSV_IA_red.csv", index=False)
 # rd.correlation(df_reduc)
 
-#p_kmscr.Kmeans_scratch()
+# p_kmscr.Kmeans_scratch()
 
 mt.evaluate_kmeans(df_reduc[:1000])
 
 # Classification
-#k_sci.kNN_scikit(df_reduc)
-#k_scr.kNN_scratch(df_reduc)
+# k_sci.kNN_scikit(df_reduc)
+# k_scr.kNN_scratch(df_reduc)

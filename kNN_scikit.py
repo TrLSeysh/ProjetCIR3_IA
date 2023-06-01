@@ -5,10 +5,11 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 import seaborn as sns
-from matplotlib import pyplot as plt 
+from matplotlib import pyplot as plt
 
 df_knn = pd.read_csv("CSV_IA_red.csv", sep=",")
 df_knn = df_knn.dropna()
+
 
 def kNN_scikit(df_knn):
     """
@@ -28,19 +29,17 @@ def kNN_scikit(df_knn):
     train_preds = knn_model.predict(X_train)
     mse = mean_squared_error(y_train, train_preds)
     rmse = sqrt(mse)
-    print('RMSE sur base Training', rmse)
+    print("RMSE sur base Training", rmse)
 
     # Evaluation RMSE sur base Test
     test_preds = knn_model.predict(X_test)
     mse = mean_squared_error(y_test, test_preds)
     rmse = sqrt(mse)
-    print('RMSE sur base Test', rmse)
+    print("RMSE sur base Test", rmse)
 
     # Ploting the predict classes classification
     cmap = sns.cubehelix_palette(as_cmap=True)
     f, ax = plt.subplots()
-    points = ax.scatter(
-       X_test[:, 1], X_test[:, 0], c=test_preds, s=50, cmap=cmap
-    )
+    points = ax.scatter(X_test[:, 1], X_test[:, 0], c=test_preds, s=50, cmap=cmap)
     f.colorbar(points)
     plt.show()
