@@ -11,6 +11,7 @@ import K_mean_scratch as p_kmscr
 import kNN_scikit as k_sci
 import kNN_scratch as k_scr
 import metrics as mt
+import repartition_données as rpd
 
 df = pd.read_csv("csv_cleaned.csv", sep=",")
 df.info()
@@ -30,8 +31,11 @@ df_reduc.to_csv("CSV_IA_red.csv", index=False)
 #p_kmscr.Kmeans_scratch()
 #p_kmsci.display_kmean(df_prep, 21)
 #p_kmscr.Kmeans_scratch()
-mt.evaluate_kmeans(df_reduc[:1000])
+# mt.evaluate_kmeans(df_reduc[:1000])
 
-# Classification
-#k_sci.kNN_scikit(df_reduc)
-#k_scr.kNN_scratch(df_reduc)
+# Répartition des données
+X_train, X_test, y_train, y_test = rpd.hold_out()
+
+# Classification KNN
+k_sci.kNN_scikit(df_reduc, X_train, X_test, y_train, y_test)
+k_scr.test_kNN_scr(X_train, X_test, y_train)

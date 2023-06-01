@@ -43,10 +43,13 @@ class kNN:
         most_common = Counter(k_nearest_labels).most_common(1)
         return most_common[0][0]
 
-knn_scratch = kNN(k=3)
-knn_scratch.fit(X_train, y_train)
-predictions = knn_scratch.predict(X_test)
-print("Predictions:", predictions)
-np.set_printoptions(suppress=True)
-print(X_train.values[0])    
-print(X_test.values[0])
+def test_kNN_scr(X_train, X_test, y_train):
+    knn_scratch = kNN(k=3)
+    knn_scratch.fit(X_train, y_train)
+    predictions = knn_scratch.predict(X_test)
+    print("Predictions:", predictions)
+    np.set_printoptions(suppress=True)
+    print(X_train.values[0])    
+    print(X_test.values[0])
+
+test_kNN_scr(X_train, X_test, y_train)
