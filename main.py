@@ -2,7 +2,7 @@
 Module pandas & numpy used for data formatting
 """
 import pandas as pd
-import numpy as np  
+import numpy as np
 import decouverte_donnees as p_dd
 
 df = pd.read_csv("csv_cleaned.csv", sep=",")
@@ -30,7 +30,7 @@ import metrics as mt
 
 import repartition_données as rpd
 # Répartition des données
-X_train, X_test, y_train, y_test = rpd.hold_out()
+X_train, X_test, y_train, y_test = rpd.hold_out(df_reduc)
 
 import kNN_scikit as k_sci
 import kNN_scratch as k_scr
