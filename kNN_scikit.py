@@ -44,5 +44,3 @@ def kNN_scikit(df_knn):
     )
     f.colorbar(points)
     plt.show()
-
-kNN_scikit(df_knn)
