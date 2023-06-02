@@ -9,6 +9,7 @@ all functions except get_cluster return .json file with needed data.
 """
 
 import sys
+import pickle as pk
 import numpy as np
 import pandas as pd
 import repartition_données as rpd
@@ -77,19 +78,26 @@ elif MODE == "knn":
     test_preds, knn_model = k_sci.kNN_scikit(df, X_train, X_test, y_train, y_test)
     predict = knn_model.predict(acc.values).round()
 
-    print(predict[0])
-    pd.Series({"pred_grav": predict[0]}).to_json("pred_grav.json")
+    print("Gravite predite : ", predict[0])
+    pd.Series({"pred_grav": predict[0]}).to_json("pred_grav_KNN.json")
 
 
 elif MODE == "classification":
     try:
-        info_acc = list(sys.argv[2:9])
-        METHOD = float(sys.argv[10])
+        info_acc = list(sys.argv[2:6])
+        METHOD = str(sys.argv[6])
     except IndexError:
         print(
             "Arguments seem to be missing, try running command with args for info_acc & METHOD\n"
         )
         sys.exit(1)
+    model = pk.load(open(f"{METHOD}.sav", 'rb'))
+    acc = pd.DataFrame(columns=("descr_cat_veh","descr_lum","description_intersection","descr_type_col"), data=[info_acc])
+    result = model.predict(acc)
+
+    print("Gravite predite : ", result)
+    pd.Series({"pred_grav": result[0]}).to_json("pred_grav_HighLevel.json")
+
 else:
     print(
         f"mode {MODE} inconnu, les modes acceptés sont :\n1. kmeans\n2. knn\n3. classification\n"
