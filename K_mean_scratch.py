@@ -41,7 +41,6 @@ def l2_distance(lat1, lon1, lat2, lon2):
 
 
 def kmeans(latitude, longitude, n_clusters, max_iters=100, func="Haversine"):
-    # Center coordinates of France
     center_latitude = 46.603354
     center_longitude = 1.888334
 
@@ -52,6 +51,7 @@ def kmeans(latitude, longitude, n_clusters, max_iters=100, func="Haversine"):
     data = np.column_stack((lat_rad, lon_rad))
 
     # Calcul du centroid
+    centroids = np.array([[np.radians(center_latitude), np.radians(center_longitude)]] * n_clusters)
     # Initialize centroids with the center coordinates of France
     centroids = np.array(
         [[np.radians(center_latitude), np.radians(center_longitude)]] * n_clusters
@@ -62,6 +62,9 @@ def kmeans(latitude, longitude, n_clusters, max_iters=100, func="Haversine"):
         # Ensuite on itère la paire lat et lon en fonction de data
 
         if func == "Haversine":
+            distances = np.array([haversine_distance(lat, lon, centroids[:, 0], centroids[:, 1]) for lat, lon in data])
+        elif func == "L1" :
+            distances = np.array([l1_distance(lat, lon, centroids[:, 0], centroids[:, 1]) for lat, lon in data])
             distances = np.array(
                 [
                     haversine_distance(lat, lon, centroids[:, 0], centroids[:, 1])
@@ -111,7 +114,8 @@ def kmeans(latitude, longitude, n_clusters, max_iters=100, func="Haversine"):
     return labels, centroids
 
 
-def Kmeans_scratch(df, user_clusters, func="Haversine"):
+def Kmeans_scratch( user_clusters, func="Haversine", csv="CSV_IA.csv"):
+    df= pd.read_csv(csv, encoding="latin-1")
 
     # Avoir les valeurs de la dataframe sur une variable
     latitude = df["latitude"].values
@@ -139,3 +143,4 @@ def Kmeans_scratch(df, user_clusters, func="Haversine"):
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     fig.show()
+

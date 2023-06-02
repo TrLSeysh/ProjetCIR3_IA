@@ -3,16 +3,18 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 
-def decouverte_donnees():
-    df = pd.read_csv("stat_acc_V4.csv", encoding="latin-1")
+def decouverte_donnees(csv ="stat_acc_V4.csv"):
+    df= pd.read_csv(csv, encoding="latin-1")
 
-    # Remplacement de la gravité de l'accident par une valeur en chiffre
-    # c(Indemne = 1, Tué = 2, "Blessé hospitalisé" = 3, "Blessé léger" = 4)
-    print("SIUUUU :", df["descr_grav"].unique())
 
-    print("Nombre de colonnes:", len(df.columns))
+    print("Valeur cible :",df['descr_grav'].unique())
 
-    print("Nombre de lignes(taille de la base de données):", len(df))
+
+    print("Features:", len(df.columns)-1)
+
+    print("Instance:", len(df.columns))
+
+    print("Nombre de lignes(instace par classe):", len(df))
 
     print("Nombre de valeurs dans la base de données(colonnes * lignes):", df.size)
 
