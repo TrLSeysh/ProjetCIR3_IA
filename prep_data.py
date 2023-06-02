@@ -113,7 +113,7 @@ def change_data(df_prep):
     """
     df_prep = df_prep.loc[(df_prep["latitude"] != 0) | (df_prep["longitude"] != 0)]
 
-    # 0 : Indemne / 1 : Blessé léger / 2 Tué & blessé grave
+    # 0 : Indemne & Blessé léger / 1 : Tué & blessé grave
     df_prep.loc[:, "descr_grav"] = df_prep["descr_grav"].replace(
         {1: 0, 2: 1, 3: 1, 4: 0}
     )
