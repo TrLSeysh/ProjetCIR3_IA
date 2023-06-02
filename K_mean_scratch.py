@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from math import radians, sin, cos, sqrt, atan2
 
-
 def haversine_distance(lat1, lon1, lat2, lon2):
     # moyenne du rayon de la terre
     R = 6371.0
@@ -19,10 +18,7 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     dlat = lat2_rad - lat1_rad
 
     # Calcul entre deux points géographiques à partir de leur coordonnées de latitude et longitude
-    # Source du calcul:  https://towardsdatascience.com/calculating-distance-between-two-geolocations-in-python-26ad3afe287b
-    a = (
-        np.sin(dlat / 2) ** 2
-        + np.cos(lat1_rad) * np.cos(lat2_rad) * np.sin(dlon / 2) ** 2
+    a = ( np.sin(dlat / 2) ** 2 + np.cos(lat1_rad) * np.cos(lat2_rad) * np.sin(dlon / 2) ** 2
     )
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
 

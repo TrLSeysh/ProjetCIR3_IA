@@ -31,6 +31,7 @@ def train_evaluate_classifier(classifier, X_train, y_train, X_test, y_test, clas
 def leave_one_out(csv="CSV_IA_red.csv"):
     df = pd.read_csv(csv)
     df = df.dropna()
+    df = df.head(2000)
     df = df.head(1000)
     X = df.drop(["latitude", "longitude", "an_nais", "descr_grav"], axis=1).values
     y = df["descr_grav"].values
