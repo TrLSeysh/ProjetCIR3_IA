@@ -124,7 +124,7 @@ def Kmeans_scratch( user_clusters, func="Haversine", csv="CSV_IA.csv"):
     plt.scatter(longitude, latitude, c=labels)
 
     # Faire apparaitre les centroides
-    plt.scatter(centroids[:, 1], centroids[:, 0], c="red", marker="x")
+    # plt.scatter(centroids[:, 1], centroids[:, 0], c="red", marker="x")
     plt.xlabel("Longitude")
     plt.ylabel("Latitude")
     plt.title("Clustering K-means")

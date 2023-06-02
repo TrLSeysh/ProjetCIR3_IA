@@ -37,7 +37,7 @@ mt.evaluate_kmeans(df_reduc[:1000])
 
 
 # Répartition des données
-X_train, X_test, y_train, y_test = rpd.hold_out(df_reduc)
+X_train, X_test, y_train, y_test = rpd.hold_out("CSV_IA_red.csv")
 
 
 # Classification KNN
