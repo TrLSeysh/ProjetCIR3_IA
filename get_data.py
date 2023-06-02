@@ -1,3 +1,13 @@
+"""
+get_data.py functions are used for scripts.sh. 
+It permits to use kmeans, knn and classification python programs.
+It sends the necessary informations to return prediction of the wanted value 
+(cluster for kmeans & descr_grav for knn and classification)
+
+all functions except get_cluster return .json file with needed data.
+
+"""
+
 import sys
 import numpy as np
 import pandas as pd
@@ -28,7 +38,6 @@ if MODE == "kmeans":
     try:
         LAT = float(sys.argv[2])
         LON = float(sys.argv[3])
-        print(np.float_(sys.argv[4:]))
         centroids = np.array(np.float_(sys.argv[4:])).reshape(-1, 2)
     except IndexError:
         print(
@@ -80,11 +89,11 @@ elif MODE == "classification":
         print(
             "Arguments seem to be missing, try running command with args for info_acc & METHOD\n"
         )
-        exit(1)
+        sys.exit(1)
     # acc = pd.DataFrame(columns=df.columns.drop("descr_grav"), data=[info_acc])
 
 else:
     print(
         f"mode {MODE} non reconnu, les modes acceptés sont :\n1. kmeans\n2. knn\n3. classification\n"
     )
-    exit(1)
+    sys.exit(1)
