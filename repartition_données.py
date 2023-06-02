@@ -7,7 +7,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.model_selection import LeaveOneOut, cross_val_score
 
 
-def hold_out(df):
 
 def hold_out(csv="CSV_IA_red.csv"):
     df=pd.read_csv(csv)

@@ -116,7 +116,6 @@ def kmeans(latitude, longitude, n_clusters, max_iters=100, func="Haversine"):
 
 def Kmeans_scratch( user_clusters, func="Haversine", csv="CSV_IA.csv"):
     df= pd.read_csv(csv, encoding="latin-1")
-def Kmeans_scratch(df, user_clusters, func="Haversine"):
 
     # Avoir les valeurs de la dataframe sur une variable
     latitude = df["latitude"].values
