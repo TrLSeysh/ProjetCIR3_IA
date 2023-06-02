@@ -20,10 +20,8 @@ def train_evaluate_classifier(classifier, X_train, y_train, X_test, y_test):
 def leave_one_out(csv="CSV_IA_red.csv"):
     df = pd.read_csv(csv)
     df = df.dropna()
-    df = df.head(1000)
-    df = df.drop(["latitude", "longitude", "an_nais"], axis=1)  # Drop latitude, longitude, et an_nais 
+    df = df.head(2000)
     X = df.drop(["descr_grav"], axis=1).values
-    X = df.drop(["latitude", "longitude", "an_nais", "descr_grav"], axis=1).values
     y = df["descr_grav"].values
 
     loo = LeaveOneOut()
