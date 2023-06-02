@@ -14,7 +14,7 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay,
 )
 
-
+#On prend en parametre le classifier et son nom et les valeurs distincts: Train et test
 def train_evaluate_classifier(classifier, X_train, y_train, X_test, y_test, classifier_name):
     classifier.fit(X_train, y_train)
     pk.dump(classifier, open(f"{classifier_name}.sav", 'wb'))
@@ -27,7 +27,8 @@ def train_evaluate_classifier(classifier, X_train, y_train, X_test, y_test, clas
 
     return accuracy, precision, recall, f1
 
-
+#la fonction prend en parametre le nom du fichier qui contient les données en accidentologie
+#Renvoie la liste des X_test X_train et de meme pour y
 def leave_one_out(csv="CSV_IA_red.csv"):
     df = pd.read_csv(csv)
     df = df.dropna()
@@ -50,7 +51,8 @@ def leave_one_out(csv="CSV_IA_red.csv"):
     print("Leave one out sans GridSearchCV")
     return X_train_list, X_test_list, y_train_list, y_test_list
 
-
+#Le programme prend rien parametre et renvoie rien
+#Elle affiche les metriques comme le f1-score et le rappel etc...
 def high_level_cross_validation():
     X_train_list, X_test_list, y_train_list, y_test_list = leave_one_out()
 

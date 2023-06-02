@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import LeaveOneOut
 
-
+#Fonction hold out, le parametres est le nom du CSV qui contient les valeurs numérisés d'accidentologie
 def hold_out(csv="CSV_IA_red.csv"):
     df=pd.read_csv(csv)
     df= df.dropna()
@@ -18,6 +18,7 @@ def hold_out(csv="CSV_IA_red.csv"):
     print("Hold out")
     return X_train, X_test, y_train ,y_test
 
+#Fonction pour le leave one out, le parametres est le nom du CSV qui contient les valeurs numérisés d'accidentologie
 def leave_one_out(csv ="CSV_IA_red.csv"):
     df = pd.read_csv(csv)
     df = df.dropna()
