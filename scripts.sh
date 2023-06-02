@@ -9,12 +9,12 @@ case "$OPTION" in
 
         python get_data.py $OPTARG ${3} ${4} "${array[@]}"
 
-        read -p "Press any key to exit:" 
+        # read -p "Press any key to exit:" 
         exit 0
         ;;
     ?)
         echo "utilisation de la commande : scripts.sh [-m (kmeans, knn, classification)] [arguments]"
-        read -p "Press any key to exit:" 
+        # read -p "Press any key to exit:" 
         exit 1
         ;;
     esac
