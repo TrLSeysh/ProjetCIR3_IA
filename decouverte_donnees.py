@@ -14,7 +14,7 @@ def decouverte_donnees(csv ="stat_acc_V4.csv"):
 
     print("Instance:", len(df.columns))
 
-    print("Nombre de lignes(instace par classe):", len(df))
+    print("Nombre de lignes(instace par classe):", len(df['descr_athmo']))
 
     print("Nombre de valeurs dans la base de données(colonnes * lignes):", df.size)
 
@@ -44,3 +44,4 @@ def decouverte_donnees(csv ="stat_acc_V4.csv"):
 
     # Affichage des figures
     plt.show()
+
