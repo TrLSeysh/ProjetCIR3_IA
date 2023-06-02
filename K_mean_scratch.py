@@ -117,7 +117,7 @@ def Kmeans_scratch( user_clusters, func="Haversine", csv="CSV_IA.csv"):
     latitude = df["latitude"].values
     longitude = df["longitude"].values
     n_clusters = user_clusters
-    max_iters = 100  # Set the maximum number of iterations
+    max_iters = 100  #On choisit un maximum d'itérations
     labels, centroids = kmeans(latitude, longitude, int(n_clusters), max_iters, func)
 
     # Faire apparaitre la carte
