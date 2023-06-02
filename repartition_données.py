@@ -11,10 +11,9 @@ from sklearn.model_selection import LeaveOneOut
 def hold_out(csv="CSV_IA_red.csv"):
     df=pd.read_csv(csv)
     df= df.dropna()
-    X = df.drop(["descr_grav"], axis=1).values
+    X = df.drop(["descr_grav"], axis=1)
     y = df["descr_grav"]
     X_train, X_test, y_train , y_test = train_test_split(X,y,test_size=0.2, random_state=50)
-    X_train, X_test, y_train , y_test = train_test_split(X,y,test_size=0.25, random_state=50)
     print("Hold out")
     return X_train, X_test, y_train ,y_test
 
