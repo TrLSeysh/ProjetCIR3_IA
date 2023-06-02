@@ -73,13 +73,12 @@ def convert_date(df_prep):
     print("\nchanging str dates to datetime...")
 
     df_prep["mois"] = pd.to_datetime(df_prep["date"]).dt.month
-    df_prep["mois"].info()
     df_prep["heure"] = pd.to_datetime(df_prep["date"]).dt.hour
     df_prep = df_prep.drop("date", axis="columns")
 
     df_prep["an_nais"] = pd.to_datetime(
         df_prep["an_nais"], format="%Y", yearfirst=True
-    ).dt.strftime("%Y")
+    ).dt.year
     return df_prep
 
 

@@ -1,3 +1,13 @@
+"""
+get_data.py functions are used for scripts.sh
+It permits to use kmeans, knn and classification python programs.
+Sends necessary informations to return prediction of wanted value 
+(cluster for kmeans & descr_grav for knn and classification)
+
+all functions except get_cluster return .json file with needed data.
+
+"""
+
 import sys
 import numpy as np
 import pandas as pd
@@ -28,16 +38,15 @@ if MODE == "kmeans":
     try:
         LAT = float(sys.argv[2])
         LON = float(sys.argv[3])
-        print(np.float_(sys.argv[4:]))
-        centroids = np.array(np.float_(sys.argv[4:])).reshape(-1, 2)
+        centroids_input = np.array(np.float_(sys.argv[4:])).reshape(-1, 2)
     except IndexError:
         print(
             "Arguments seem to be missing, try running command with args for LAT, LON & centroids\n"
         )
         sys.exit(1)
 
-    print(f"latitude : {LAT}\nlongitude : {LON}\ncentroids : {centroids}\n")
-    cluster_id = get_cluster(LAT, LON, centroids)
+    print(f"latitude : {LAT}\nlongitude : {LON}\ncentroids : {centroids_input}\n")
+    cluster_id = get_cluster(LAT, LON, centroids_input)
     print("cluster : ", cluster_id)
 
     pd.DataFrame(
@@ -45,8 +54,8 @@ if MODE == "kmeans":
             "point": {"id": None, "lat": LAT, "lon": LON},
             "cluster": {
                 "id": cluster_id,
-                "lat": centroids[cluster_id][0],
-                "lon": centroids[cluster_id][1],
+                "lat": centroids_input[cluster_id][0],
+                "lon": centroids_input[cluster_id][1],
             },
         }
     ).to_json("cluster_point.json")
@@ -63,8 +72,8 @@ elif MODE == "knn":
 
     df = pd.read_csv(CSV, sep=",")
     acc = pd.DataFrame(columns=df.columns.drop("descr_grav"), data=[info_acc])
-    print(acc)
-    X_train, X_test, y_train, y_test = rpd.hold_out(df)
+
+    X_train, X_test, y_train, y_test = rpd.hold_out(CSV)
     test_preds, knn_model = k_sci.kNN_scikit(df, X_train, X_test, y_train, y_test)
     predict = knn_model.predict(acc.values).round()
 
@@ -80,11 +89,9 @@ elif MODE == "classification":
         print(
             "Arguments seem to be missing, try running command with args for info_acc & METHOD\n"
         )
-        exit(1)
-    # acc = pd.DataFrame(columns=df.columns.drop("descr_grav"), data=[info_acc])
-
+        sys.exit(1)
 else:
     print(
-        f"mode {MODE} non reconnu, les modes acceptés sont :\n1. kmeans\n2. knn\n3. classification\n"
+        f"mode {MODE} inconnu, les modes acceptés sont :\n1. kmeans\n2. knn\n3. classification\n"
     )
-    exit(1)
+    sys.exit(1)
