@@ -5,11 +5,16 @@ import matplotlib.pyplot as plt
 
 def decouverte_donnees(csv ="stat_acc_V4.csv"):
     df= pd.read_csv(csv, encoding="latin-1")
+def decouverte_donnees():
+    df = pd.read_csv("stat_acc_V4.csv", encoding="latin-1")
 
 
     #Remplacement de la gravité de l'accident par une valeur en chiffre
     #c(Indemne = 1, Tué = 2, "Blessé hospitalisé" = 3, "Blessé léger" = 4)
     print("Valeur cible :",df['descr_grav'].unique())
+    # Remplacement de la gravité de l'accident par une valeur en chiffre
+    # c(Indemne = 1, Tué = 2, "Blessé hospitalisé" = 3, "Blessé léger" = 4)
+    print("SIUUUU :", df["descr_grav"].unique())
 
 
     print("Features:", len(df.columns)-1)
@@ -23,25 +28,25 @@ def decouverte_donnees(csv ="stat_acc_V4.csv"):
     # Première page
     plt.figure(1)
 
-    plt.hist(df['descr_grav'])
+    plt.hist(df["descr_grav"])
     plt.title("Gravité des accidents")
 
-    #Deuxième
+    # Deuxième
     plt.figure(2)
 
-    plt.hist(df['descr_lum'])
+    plt.hist(df["descr_lum"])
     plt.title("Luminosité de l'accident")
 
-    #Troisième
+    # Troisième
     plt.figure(3)
 
-    plt.hist(df['descr_athmo'])
+    plt.hist(df["descr_athmo"])
     plt.title("L'athmosphère de l'accident")
 
-    #Quatrième
+    # Quatrième
     plt.figure(4)
 
-    plt.hist(df['descr_etat_surf'])
+    plt.hist(df["descr_etat_surf"])
     plt.title("Etat de la route")
 
     # Affichage des figures

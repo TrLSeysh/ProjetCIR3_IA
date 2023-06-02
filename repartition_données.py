@@ -6,11 +6,15 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import LeaveOneOut, cross_val_score
 
+
+def hold_out(df):
+
 def hold_out(csv="CSV_IA_red.csv"):
     df=pd.read_csv(csv)
     df= df.dropna()
     X = df.drop(["latitude","longitude","an_nais","descr_grav"], axis=1).values
     y = df["descr_grav"]
+    X_train, X_test, y_train , y_test = train_test_split(X,y,test_size=0.2, random_state=50)
     X_train, X_test, y_train , y_test = train_test_split(X,y,test_size=0.25, random_state=50)
     print("Hold out")
     return X_train, X_test, y_train ,y_test
