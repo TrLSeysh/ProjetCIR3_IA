@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-
+#On passe en parametre le nom du fichier csv qui contient les données en accidentologie, pas besoin de numerisé
 def decouverte_donnees(csv ="stat_acc_V4.csv"):
     df= pd.read_csv(csv, encoding="latin-1")
 
