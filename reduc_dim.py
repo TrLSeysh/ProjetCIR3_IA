@@ -41,7 +41,6 @@ def reduc_dim_grav(df_corr):
     list_corr = abs(corr_matrix["descr_grav"])
     # print(corr_matrix["descr_grav"])
     corr_ordered = list_corr.sort_values()
-    print(corr_ordered)
     # print(corr_matrix)
     return df_corr.drop(
         columns=[

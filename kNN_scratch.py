@@ -43,7 +43,5 @@ def test_kNN_scr(X_train, X_test, y_train):
     predictions = knn_scratch.predict(X_test)
     print("Predictions:", predictions)
     np.set_printoptions(suppress=True)
-    print(X_train.values[0])    
-    print(X_test.values[0])
     return predictions, knn_scratch
 

@@ -45,4 +45,4 @@ Exemple :
 5. requirements.txt : fichier contenant les lib nécessaires à l'execution des programmes
 6. fichiers .sav : fichiers binaires contenant les algorithmes entrainés (construits dans le même programme que les algorithmes)
 7. scripts.sh : fichier bash permettant 
-
+8. stat_acc_V4.csv : base de données non modifiée
