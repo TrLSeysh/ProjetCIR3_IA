@@ -120,17 +120,6 @@ def Kmeans_scratch( user_clusters, func="Haversine", csv="CSV_IA.csv"):
     max_iters = 100  #On choisit un maximum d'itérations
     labels, centroids = kmeans(latitude, longitude, int(n_clusters), max_iters, func)
 
-    # Faire apparaitre la carte
-    plt.scatter(longitude, latitude, c=labels)
-
-    # Faire apparaitre les centroides
-    plt.scatter(centroids[:, 1], centroids[:, 0], c="red", marker="x")
-    plt.xlabel("Longitude")
-    plt.ylabel("Latitude")
-    plt.title("Clustering K-means")
-    plt.legend()
-    plt.show()
-
     data = pd.DataFrame(
         {"latitude": latitude, "longitude": longitude, "labels": labels}
     )

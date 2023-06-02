@@ -37,12 +37,12 @@ mt.evaluate_kmeans(df_reduc[:1000])
 
 
 # Répartition des données
-X_train, X_test, y_train, y_test = rpd.hold_out(df_reduc)
+X_train, X_test, y_train, y_test = rpd.hold_out("CSV_IA_red.csv")
 
 
 # Classification KNN
 test_preds, knn_model = k_sci.kNN_scikit(df_reduc, X_train, X_test, y_train, y_test)
-predictions, knn_scratch = k_scr.test_kNN_scr(X_train, X_test, y_train)
+#predictions, knn_scratch = k_scr.test_kNN_scr(X_train, X_test, y_train)
 
 #Evaluation KNN
 mt.evaluate_classifaction(knn_model, X_test, y_test, test_preds)

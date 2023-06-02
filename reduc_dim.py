@@ -4,9 +4,6 @@ from sklearn.decomposition import PCA
 import numpy as np
 import plotly.express as px
 
-df_corr = pd.read_csv("CSV_IA.csv", sep=",")
-
-
 def correlation(df_corr):
     """
     Give the correlation matrix and print it
